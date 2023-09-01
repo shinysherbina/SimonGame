@@ -115,3 +115,16 @@ $(document).keydown(function(){
     }
 });
 
+if(document.documentElement.clientWidth < 900){
+    console.log("Inside");
+    $("#level-title").text("Click on the screen to start "+level++);
+    $(document).on("click",function(){
+        if (gameOn == 0){
+            gameOn =1;
+            $("body").removeClass("game-over");
+            setTimeout(function(){
+                addGameSequence();
+            },500);
+        }
+    });
+}
