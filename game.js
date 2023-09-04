@@ -4,6 +4,7 @@
 var gameSequence = [];
 var userSequence = [];
 var colours =["green","red","yellow","blue"];
+var temp = ["yellow","yellow","yellow"];
 var level =1;
 var gameOn = 0;
 var tempCounter=0;
@@ -48,7 +49,7 @@ function resetGame(){
     gameOn = 0;
     tempCounter=0;
     level =1;
-    $("#level-title").text("Game over.Please press a key to start");
+    $("#level-title").text("Game over.Please press the start button");
 }
 
 // Function to increase the level
@@ -62,15 +63,18 @@ function increaseLevel(){
 // ------------------------------
 function addGameSequence(){
     var randomNumber = generateRandomNumber();
-    var currentColour = colours[randomNumber];
+    var currentColour = colours[randomNumber]; 
     gameSequence.push(currentColour);
     userSequence = [];
 
-    eval (currentColour+"Audio.play()");
+    setTimeout(function(){
+        eval (currentColour+"Audio.play()");
+    },200);
     $("#"+currentColour).fadeOut(100).fadeIn(100);
     increaseLevel();
 
 }
+
 
 
 // Get User Sequence and check if it is right (Event listener)
@@ -105,7 +109,8 @@ $(".btn").on("click",function(){
 // Start the game when a key is pressed (Event listener)
 //------------------------------------------------------
 
-$(document).keydown(function(){
+$("#start").on("click",function(){
+    pressButton("start");
     if (gameOn == 0){
         gameOn =1;
         $("body").removeClass("game-over");
@@ -114,17 +119,3 @@ $(document).keydown(function(){
         },500);
     }
 });
-
-if(document.documentElement.clientWidth < 900){
-    console.log("Inside");
-    $("#level-title").text("Click on the screen to start "+level++);
-    $(document).on("click",function(){
-        if (gameOn == 0){
-            gameOn =1;
-            $("body").removeClass("game-over");
-            setTimeout(function(){
-                addGameSequence();
-            },500);
-        }
-    });
-}
