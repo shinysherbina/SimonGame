@@ -2,3 +2,5 @@ This is a simple game. Memorize the colours in the order in which it blinks and 
 
 One wrong move and the game ends.
 
+Enjoy the game at https://shinysherbina.github.io/SimonGame/
+
